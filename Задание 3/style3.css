@@ -66,11 +66,36 @@
     display: flex;
     flex-direction: column;
     width: 403px;
-    height: 400px;
+    min-height: 400px;
 }
 
 .my-geo{
-    target:"_blank"
+    target:"_blank";
+    width: 100px;
+    height: auto;
+    border: #8CE2FC solid 4px;
+    padding: 5px;
+    border-radius: 8px;
+    align-self: flex-end;
+    text-decoration: none;
+    text-align: center;
+}
+
+.my-msg, .resp-msg{
+    max-width: 150px;
+    height: auto;
+    border: #8CE2FC solid 4px;
+    border-radius: 8px;
+    padding: 5px;
+    text-align: center;
+}
+
+.resp-msg{
+    align-self: flex-start;
+}
+
+.my-msg{
+align-self: flex-end;
 }
 
 
