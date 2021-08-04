@@ -1,16 +1,16 @@
 
-const wsUri = "wss://echo.websocket.org/"
+const wsUrl = "wss://echo.websocket.org/"
 
 const output = document.querySelector(".data-output-wrapper");
-/*const btnOpen = document.querySelector('.j-btn-open');*/
 const btnSend = document.querySelector('.msg-send');
+const btnGeo = document.querySelector('.get-geo');
 const inputText =document.querySelector('.data-entry__input');
 
 let websocket;
 
 btnSend.addEventListener('click',  () => {
-    websocket = new WebSocket(wsUri);
-     websocket.onopen = function(evt) {
+    websocket = new WebSocket(wsUrl);
+    websocket.onopen = function(evt) {
          const message = inputText.value;
          if(message !== "" && message.trim() !== "") {
              writeToScreenMyMsg(message);
@@ -24,6 +24,41 @@ btnSend.addEventListener('click',  () => {
     };
 
 });
+
+/*btnGeo.addEventListener('click',  () => {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const { coords } = position;
+            let link = document.createElement("a");
+            link.classList.add('my-geo');
+            link.innerHTML = 'Гео-локация'
+            link.href =`https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}`
+            link.target="_blank"
+            output.appendChild(link);
+        });
+    }
+});*/
+
+btnGeo.addEventListener('click',  () => {
+    websocket = new WebSocket(wsUrl);
+    websocket.onopen = function(evt){
+        if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const { coords } = position;
+            let link = document.createElement("a");
+            link.classList.add('my-geo');
+            link.innerHTML = 'Гео-локация'
+            link.href =`https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}`
+            link.target="_blank"
+            output.appendChild(link);
+            websocket.send(`https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}`)
+        });
+    }}
+
+});
+
+
+
 
 function writeToScreenMyMsg(message) {
     let pre = document.createElement("p");
