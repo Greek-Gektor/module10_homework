@@ -22,22 +22,7 @@ btnSend.addEventListener('click',  () => {
     websocket.onmessage = function(evt) {
         writeToScreenMsg(evt.data,'resp-msg');
     };
-
 });
-
-/*btnGeo.addEventListener('click',  () => {
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            const { coords } = position;
-            let link = document.createElement("a");
-            link.classList.add('my-geo');
-            link.innerHTML = 'Гео-локация'
-            link.href =`https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}`
-            link.target="_blank"
-            output.appendChild(link);
-        });
-    }
-});*/
 
 btnGeo.addEventListener('click',  () => {
     websocket = new WebSocket(wsUrl);
