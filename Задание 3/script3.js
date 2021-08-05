@@ -13,14 +13,14 @@ btnSend.addEventListener('click',  () => {
     websocket.onopen = function(evt) {
          const message = inputText.value;
          if(message !== "" && message.trim() !== "") {
-             writeToScreenMyMsg(message);
+             writeToScreenMsg(message,'my-msg');
              websocket.send(message)
          }else{
              alert("Значение не должно быть пустым")
          }
     };
     websocket.onmessage = function(evt) {
-        writeToScreenRespMsg(evt.data);
+        writeToScreenMsg(evt.data,'resp-msg');
     };
 
 });
@@ -57,25 +57,12 @@ btnGeo.addEventListener('click',  () => {
 
 });
 
-
-
-
-function writeToScreenMyMsg(message) {
+function writeToScreenMsg(message,clsName) {
     let pre = document.createElement("p");
     pre.style.wordWrap = "break-word";
-    pre.classList.add('my-msg');
+    pre.classList.add(clsName);
     pre.innerHTML = message;
     output.appendChild(pre);
-    return pre
-}
-
-function writeToScreenRespMsg(message) {
-    let pre = document.createElement("p");
-    pre.style.wordWrap = "break-word";
-    pre.classList.add('resp-msg');
-    pre.innerHTML = message;
-    output.appendChild(pre);
-    return pre
 }
 
 
